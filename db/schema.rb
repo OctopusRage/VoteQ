@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629225638) do
+ActiveRecord::Schema.define(version: 20160630072855) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 20160629225638) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
+  create_table "user_votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "vote_id"
+    t.integer  "vote_option_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "user_votes", ["user_id"], name: "index_user_votes_on_user_id"
+  add_index "user_votes", ["vote_id"], name: "index_user_votes_on_vote_id"
+  add_index "user_votes", ["vote_option_id"], name: "index_user_votes_on_vote_option_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -52,5 +64,24 @@ ActiveRecord::Schema.define(version: 20160629225638) do
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "vote_options", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "vote_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "vote_options", ["vote_id"], name: "index_vote_options_on_vote_id"
+
+  create_table "votes", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.boolean  "status",     default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end
