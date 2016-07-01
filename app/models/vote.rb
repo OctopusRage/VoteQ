@@ -5,6 +5,7 @@ class Vote < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :user_id, presence:true
+	validates :status, presence: true
 	scope :desc, -> {order(created_at: :desc)}
 
 	def generate_vote_options(options)
@@ -19,6 +20,7 @@ class Vote < ActiveRecord::Base
 	      id: id,
 	      title: title,  
 	      user_id: user_id,
+	      status: status,
 	      created_at: created_at, 
 	      updated_at: updated_at,   
 	      options: vote_options

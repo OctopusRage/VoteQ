@@ -17,7 +17,8 @@ class Api::V1::User::VotesController < UserController
 	end
 
 	def create
-		vote = current_user.votes.build(title: params[:title])
+		published = params[:published]
+		vote = current_user.votes.build(title: params[:title], status: params[:is_open])
 		vote.generate_vote_options(params[:options])
 		if vote.save			
 			render json: {
@@ -32,6 +33,23 @@ class Api::V1::User::VotesController < UserController
 				data: vote.errors
 			}, status: 422
 		end
+	end
+
+	def update
+		vote = current_user.votes.find(params[:id])
+		if vote.update(title: params[:title], status: params[:is_open])
+			render json: {
+				status: 'success', 
+				data: {
+					vote: vote
+				}, status: 200
+			}
+		else
+			render json: {
+				status: 'error',
+				data: vote.errors
+			}, status: 422
+		end	
 	end
 	
 	def show

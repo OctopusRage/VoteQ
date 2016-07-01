@@ -25,7 +25,8 @@ Rails.application.routes.draw do
         namespace :user do 
           resource :users, only: [:create]
           resource :session, only: [:create]
-          resources :votes, only: [:create, :show, :index]
+          resources :votes, only: [:create, :show, :index, :update]
+          resource :user_votes, only: [:create]
         end
       end
     end
