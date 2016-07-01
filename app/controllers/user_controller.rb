@@ -1,3 +1,3 @@
 class UserController < ApplicationController
-	include AdminSessionHelper
+	include UserSessionHelper
 end

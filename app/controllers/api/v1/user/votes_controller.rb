@@ -1,9 +1,10 @@
 class Api::V1::User::VotesController < UserController
-	before_action :authenticate_with_token!, only: [:create, :destroy]
+	before_action :authenticate_with_token!, only: [:create]
 	
 	def create
-		vote = current_user.vote.build(votes_params)
-		if vote.save
+		vote = current_user.votes.build(votes_params)
+		vote.generate_vote_options(params[:options])
+		if vote.save			
 			render json: {
 				status: 'success', 
 				data: {
@@ -19,6 +20,6 @@ class Api::V1::User::VotesController < UserController
 	end
 
 	def votes_params
-		params.require(:vote).permit(:title, :options => [])
+		params.permit(:title)
 	end
 end
