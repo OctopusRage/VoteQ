@@ -1,7 +1,7 @@
 class Api::V1::User::UsersController < UserController
+	before_action :authenticate_with_token!, only: [:update, :destroy]
 	def create
 		user = User.new(users_params)
-		byebug
 		if user.valid_password? users_params[:password]
 			user.generate_authentication_token!
 			if user.save

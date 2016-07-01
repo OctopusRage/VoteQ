@@ -16,4 +16,8 @@ class Api::V1::User::SessionsController < UserController
       render json: { errors: "Invalid email or password" }, status: 422
     end
   end	
+  
+  def destroy
+
+  end
 end
