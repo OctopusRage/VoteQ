@@ -23,7 +23,7 @@ class Api::V1::User::UsersController < UserController
 				data: user.errors,
 			}, status: 422
 		end
-	end	
+	end
 
 	def users_params
 		params.require(:user).permit(:email, :password, :password_confirmation)
