@@ -17,7 +17,7 @@ class Api::V1::User::VotesController < UserController
 	end
 
 	def create
-		published = params[:published]
+		is_open = params[:is_open] 
 		vote = current_user.votes.build(title: params[:title], status: params[:is_open])
 		vote.generate_vote_options(params[:options])
 		if vote.save			

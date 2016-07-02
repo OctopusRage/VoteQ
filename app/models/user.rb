@@ -9,6 +9,7 @@
     validates :password, presence: true 
   	before_create :generate_authentication_token!
     has_many :votes
+    has_many :user_votes
     #has_many :votes, :through => :user_votes
     #has_many :user_votes
 

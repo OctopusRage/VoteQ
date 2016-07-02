@@ -5,7 +5,7 @@ class Vote < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :user_id, presence:true
-	validates :status, presence: true
+	validates :status, :inclusion => {:in => [true, false]}
 	scope :desc, -> {order(created_at: :desc)}
 
 	def generate_vote_options(options)
