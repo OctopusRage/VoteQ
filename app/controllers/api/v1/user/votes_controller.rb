@@ -8,9 +8,17 @@ class Api::V1::User::VotesController < UserController
 		else
 			votes = Vote.desc
 		end
+
+		if params[:status] == "open"
+			votes = votes.open
+		elsif params[:status] == "closed"
+			votes = votes.closed
+		end
+
 		render json:{
 			status: 'OK',
 			data: {
+				total: votes.count,
 				vote: votes
 			}
 		}, status: 200
