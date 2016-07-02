@@ -26,7 +26,7 @@ Rails.application.routes.draw do
           resource :users, only: [:create]
           resource :session, only: [:create]
           resources :votes, only: [:create, :show, :index, :update]
-          resource :user_votes, only: [:create]
+          resource :user_votes, only: [:create, :update]
         end
       end
     end
