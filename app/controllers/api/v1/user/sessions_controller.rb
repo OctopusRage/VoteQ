@@ -6,7 +6,7 @@ class Api::V1::User::SessionsController < UserController
 
     if user.valid_password? user_password
       sign_in user, store: false
-      user.generate_authentication_token!
+      # user.generate_authentication_token!
       user.save
       render json: {
       		status: 'success',
