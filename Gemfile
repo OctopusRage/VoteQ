@@ -41,6 +41,11 @@ gem 'devise'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+	# Guard and Guard minitest is to be used to run test automatically
+  gem 'guard'
+  gem 'guard-minitest'
+	# Mocha is mocking library that works well with minitest
+  gem 'mocha'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Setting environment variable
