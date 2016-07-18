@@ -1,5 +1,5 @@
 class Api::V1::User::VotesController < UserController
-	before_action :authenticate_with_token!, only: [:update, :index, :show]
+	before_action :authenticate_with_token!, only: [:create, :update, :index, :show]
 	
 	def index
 		is_current_user = params[:current_user]
@@ -26,26 +26,19 @@ class Api::V1::User::VotesController < UserController
 
 	def create
 		is_open = params[:is_open] 
-		curr_user = User.where(:auth_token => params[:token]).first
-		if curr_user
-			vote = curr_user.votes.build(title: params[:title], status: params[:is_open])
-			vote.generate_vote_options(params[:options])
-			if vote.save			
-				render json: {
-					status: 'success', 
-					data: {
-						vote: vote
-					}
-				}, status: 201
-			else
-				render json: {
-					status: 'fail', 
-					data: vote.errors
-				}, status: 422
-			end
+		vote = current_user.votes.build(title: params[:title], status: params[:is_open])
+		vote.generate_vote_options(params[:options])
+		if vote.save			
+			render json: {
+				status: 'success', 
+				data: {
+					vote: vote
+				}
+			}, status: 201
 		else
 			render json: {
-				status: 'fail'
+				status: 'fail', 
+				data: vote.errors
 			}, status: 422
 		end
 	end
