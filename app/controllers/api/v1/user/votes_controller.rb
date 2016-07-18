@@ -26,7 +26,7 @@ class Api::V1::User::VotesController < UserController
 
 	def create
 		is_open = params[:is_open] 
-		curr_user = user.where(:token, params[:auth_token]).first
+		curr_user = User.where(:auth_token => params[:token]).first
 		if curr_user
 			vote = curr_user.votes.build(title: params[:title], status: params[:is_open])
 			vote.generate_vote_options(params[:options])
@@ -45,8 +45,7 @@ class Api::V1::User::VotesController < UserController
 			end
 		else
 			render json: {
-				status: 'fail', 
-				data: vote.errors
+				status: 'fail'
 			}, status: 422
 		end
 	end
