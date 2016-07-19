@@ -10,7 +10,7 @@ class VoteOption < ActiveRecord::Base
   	if vote.voter_count == 0
   		0
   	else
-  		'%.2f' % (voter_count/vote.voter_count*100).to_f
+  		'%.2f' % (voter_count*100/vote.voter_count).to_f
   	end
   end
 
