@@ -18,10 +18,10 @@ class Api::V1::User::UserVotesController < UserController
 	end
 		
 	def update
-		user_vote = current_user.user_votes.find(params[:id]) 
-		if user_vote.update(user_votes_params)
+		user_vote = current_user.user_votes.where(:vote_id => params[:vote_id]).first
+		if user_vote.update(vote_option_id: params[:vote_option_id])
 			render json: {
-				status: "success", 
+				status: "success",
 				data: {
 					user_vote: user_vote
 				}
