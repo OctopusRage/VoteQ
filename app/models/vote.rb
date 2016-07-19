@@ -12,7 +12,7 @@ class Vote < ActiveRecord::Base
 
 	def generate_vote_options(options)
 		options.each do |option|
-			vote_option = self.vote_options.build(title: option)
+			vote_option = self.vote_options.build(title: option[1])
 			vote_option.save
 		end 
 	end
