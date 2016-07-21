@@ -21,6 +21,19 @@ class Vote < ActiveRecord::Base
 		user_votes.count
 	end
 
+	def as_voted_vote     
+	    {
+	      id: id,
+	      title: title,
+	      voter_count: voter_count,
+	      user: user,
+	      status: status,
+	      options: vote_options,
+	      created_at: created_at, 
+	      updated_at: updated_at,   
+	      voted: true
+	    }
+  end
 	def as_json(options={})     
 	    {
 	      id: id,
@@ -33,5 +46,5 @@ class Vote < ActiveRecord::Base
 	      updated_at: updated_at,   
 	      
 	    }
-  	end
+  end
 end
