@@ -31,7 +31,7 @@ class Vote < ActiveRecord::Base
 	      options: vote_options,
 	      created_at: created_at, 
 	      updated_at: updated_at,   
-	      voted: true
+	      voted_option_id: user.user_votes.where(vote_id: self.id).first.vote_option_id
 	    }
   end
 	def as_json(options={})     
@@ -42,9 +42,7 @@ class Vote < ActiveRecord::Base
 	      user: user,
 	      status: status,
 	      options: vote_options,
-	      created_at: created_at, 
-	      updated_at: updated_at,   
-	      
+	      created_at: created_at,
 	    }
   end
 end
