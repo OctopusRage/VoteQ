@@ -27,6 +27,8 @@ Rails.application.routes.draw do
           resource :session, only: [:create]
           resources :votes, only: [:create, :show, :index, :update]
           resource :user_votes, only: [:create, :update]
+          resource :forgot_password, only: [:create], controller: :forgot_password
+          resource :request_forgot_password, only: [:create], controller: :request_forgot_password
         end
       end
     end

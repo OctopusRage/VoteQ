@@ -4,9 +4,9 @@
   	devise :database_authenticatable, :registerable,
    		   :recoverable, :rememberable, :trackable, :validatable
 
-  	validates :auth_token, uniqueness: true
-    validates :email, presence: true
-    validates :password, presence: true 
+  	validates :auth_token, uniqueness: true, :on => :create
+    validates :email, presence: true, :on => :create
+    validates :password, presence: true, :on => :create
   	before_create :generate_authentication_token!
     has_many :votes
     has_many :user_votes
