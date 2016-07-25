@@ -7,7 +7,6 @@ class Api::V1::User::RequestForgotPasswordController < UserController
       user = user.first
       code = self.generate_reset_code
       user.update!(forgot_code: code)
-      byebug
       if UserMailer.forgot_password(user).deliver
         render json: {
           status: 'success',

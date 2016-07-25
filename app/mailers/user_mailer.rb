@@ -4,5 +4,4 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Forgot Password')
 	end
-
 end

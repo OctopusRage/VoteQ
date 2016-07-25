@@ -4,6 +4,7 @@ class Api::V1::User::ForgotPasswordController < UserController
     if current_user.forgot_code != nil
       if forgot_password_params[:forgot_code] == current_user.forgot_code
         if (reset = current_user.reset_password(forgot_password_params[:password], forgot_password_params[:password_confirmation]))
+          current_user.update!(forgot_code: nil)
           render json: {
             status: 'success',
             data: {
