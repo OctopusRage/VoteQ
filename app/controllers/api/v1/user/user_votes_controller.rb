@@ -1,5 +1,5 @@
 class Api::V1::User::UserVotesController < UserController
-	before_action :authenticate_with_token!, only: [:create, :update, :index, :show]
+	before_action :authenticate_with_token!, only: [:create, :update, :index, :show, :destroy]
 	def create
 		user_vote = current_user.user_votes.build(user_votes_params)
 		if user_vote.save
@@ -30,6 +30,21 @@ class Api::V1::User::UserVotesController < UserController
 			render json: {
 				status: "fail", 
 				data: user_vote.errors
+			}, status: 422
+		end
+	end
+
+	def destroy
+		user_vote = current_user.user_votes.where(vote_id: user_votes_params[:vote_id]).first
+		if user.destroy 
+			render json:{
+				status: "deleted",
+				messages: "a data has been deleted"
+			}, status: 204
+		else
+			render json:{
+				status: "fail",
+				messages: "delete failed"
 			}, status: 422
 		end
 	end
