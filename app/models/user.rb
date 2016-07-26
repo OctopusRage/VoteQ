@@ -18,4 +18,12 @@
       		self.auth_token = Devise.friendly_token
     	end while self.class.exists?(auth_token: auth_token)
   	end
+
+    def as_json_forgot
+      {
+        id: id,
+        email: email,
+        forgot_code: forgot_code
+      }
+    end
 end
