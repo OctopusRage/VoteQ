@@ -8,10 +8,6 @@ class UserVote < ActiveRecord::Base
   validates_with CheckVoteOptionValidator
   validates :available, inclusion: [true]
 
-  def get_opt_id
-    vote_option_id
-  end
-
   def available
   	return  self.vote.status
   end 
