@@ -11,6 +11,6 @@ class ApiVersion
 
     def check_headers(headers)  
       accept = headers['Accept']  
-      accept && accept.include?("application/vnd.halodoc.#{@version}+json")  
+      accept && accept.include?("application/vnd.voteq.#{@version}+json")  
     end 
 end
