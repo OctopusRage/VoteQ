@@ -36,7 +36,7 @@ class Api::V1::User::UserVotesController < UserController
 
 	def destroy
 		user_vote = current_user.user_votes.where(vote_id: user_votes_params[:vote_id]).first
-		if user.destroy 
+		if user_vote.destroy 
 			render json:{
 				status: "deleted",
 				messages: "a data has been deleted"
