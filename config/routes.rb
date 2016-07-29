@@ -25,7 +25,7 @@ Rails.application.routes.draw do
         namespace :user do 
           resource :users, only: [:create]
           resource :session, only: [:create]
-          resources :votes, only: [:create, :show, :index, :update]
+          resources :votes, only: [:create, :show, :index, :update, :destroy]
           resource :user_votes, only: [:create, :update, :destroy]
           resource :forgot_password, only: [:create], controller: :forgot_password
           resource :request_forgot_password, only: [:create], controller: :request_forgot_password

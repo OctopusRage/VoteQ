@@ -1,5 +1,5 @@
 class Api::V1::User::VotesController < UserController
-	before_action :authenticate_with_token!, only: [:create, :update, :index, :show]
+	before_action :authenticate_with_token!, only: [:create, :update, :index, :show, :destroy]
 	
 	def index
 		is_current_user = params[:current_user]
@@ -69,5 +69,20 @@ class Api::V1::User::VotesController < UserController
 				vote: vote
 			}
 		},  status: 200
+	end
+
+	def destroy
+		data = current_user.votes.find(params[:vote_id])
+		if data.destroy
+			render json:{
+				status: "deleted",
+				messages: "a data has been deleted"
+			}, status: 204
+		else
+			render json:{
+				status: "fail",
+				messages: "delete failed"
+			}, status: 422
+		end
 	end
 end
