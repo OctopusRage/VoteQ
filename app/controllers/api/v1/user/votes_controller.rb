@@ -62,7 +62,8 @@ class Api::V1::User::VotesController < UserController
 	
 	def show
 		vote = Vote.find(params[:id])
-		vote = vote.as_voted_vote if(current_user.user_votes.where(:vote_id => params[:id])).exists?
+		vote = vote.user_votes.find_by_user_id(current_user.id) if(current_user.user_votes.where(:vote_id => params[:id])).exists?
+
 		render json:{
 			status: 'OK',
 			data: {
