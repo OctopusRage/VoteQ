@@ -73,7 +73,7 @@ class Api::V1::User::VotesController < UserController
 	end
 
 	def destroy
-		data = current_user.votes.find(params[:vote_id])
+		data = current_user.votes.find(params[:id])
 		if data.destroy
 			render json:{
 				status: "deleted",
