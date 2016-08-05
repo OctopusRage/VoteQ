@@ -3,6 +3,9 @@ class Vote < ActiveRecord::Base
 	has_many :vote_options, dependent: :destroy
 	has_many :user_votes, dependent: :destroy
 	has_many :users, through: :user_votes, dependent: :destroy
+
+	before_destroy :delete_related
+
 	validates :title, presence: true
 	validates :user_id, presence:true
 	validates :status, :inclusion => {:in => [true, false]}
@@ -21,6 +24,10 @@ class Vote < ActiveRecord::Base
 		user_votes.count
 	end
 	
+	def delete_related
+		self.user_votes.destroy_all
+	end
+
 	def as_json(options={})     
 	    {
 	      id: id,
