@@ -2,7 +2,7 @@ class Vote < ActiveRecord::Base
 	belongs_to :user
 	has_many :vote_options, dependent: :destroy
 	has_many :user_votes, dependent: :destroy
-	has_many :users, through: :user_votes
+	has_many :users, through: :user_votes, dependent: :destroy
 	validates :title, presence: true
 	validates :user_id, presence:true
 	validates :status, :inclusion => {:in => [true, false]}
