@@ -10,7 +10,9 @@ class Api::V1::User::RequestForgotPasswordController < UserController
       if UserMailer.forgot_password(user).deliver
         render json: {
           status: 'success',
-          messages: "email has been sent"
+          data: {
+            messages: "email has been sent"
+          }
         }, status: 200
       else
         render json: {

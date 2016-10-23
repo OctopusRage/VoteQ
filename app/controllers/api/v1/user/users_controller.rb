@@ -14,13 +14,13 @@ class Api::V1::User::UsersController < UserController
 			else
 				render json: {
 					status: 'error',
-					data: user.errors,
+					messages: user.errors,
 				}, status: 422
 			end
 		else
 			render json: {
 				status: 'error',
-				data: user.errors,
+				messages: user.errors,
 			}, status: 422
 		end
 	end

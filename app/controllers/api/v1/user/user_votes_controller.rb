@@ -12,7 +12,7 @@ class Api::V1::User::UserVotesController < UserController
 		else
 			render json: {
 				status: "fail", 
-				data: user_vote.errors
+				messages: user_vote.errors
 			}, status: 422
 		end
 	end
@@ -29,7 +29,7 @@ class Api::V1::User::UserVotesController < UserController
 		else
 			render json: {
 				status: "fail", 
-				data: user_vote.errors
+				messages: user_vote.errors
 			}, status: 422
 		end
 	end

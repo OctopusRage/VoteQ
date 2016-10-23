@@ -13,7 +13,10 @@ class Api::V1::User::SessionsController < UserController
       		data: user
       	}, status: 200
     else
-      render json: { errors: "Invalid email or password" }, status: 422
+      render json: { 
+        status: 'fail',
+        messages: "Invalid email or password"
+      }, status: 422
     end
   end	
   

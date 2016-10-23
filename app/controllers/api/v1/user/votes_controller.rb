@@ -38,7 +38,7 @@ class Api::V1::User::VotesController < UserController
 		else
 			render json: {
 				status: 'fail', 
-				data: vote.errors
+				messages: vote.errors
 			}, status: 422
 		end
 	end
@@ -55,7 +55,7 @@ class Api::V1::User::VotesController < UserController
 		else
 			render json: {
 				status: 'error',
-				data: vote.errors
+				messages: vote.errors
 			}, status: 422
 		end	
 	end
@@ -77,7 +77,9 @@ class Api::V1::User::VotesController < UserController
 		if data.destroy
 			render json:{
 				status: "deleted",
-				messages: "a data has been deleted"
+				data: {
+					messages:"a data has been deleted"
+				}
 			}, status: 204
 		else
 			render json:{
