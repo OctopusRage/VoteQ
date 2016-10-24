@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023123535) do
+ActiveRecord::Schema.define(version: 20161024175307) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -74,12 +74,23 @@ ActiveRecord::Schema.define(version: 20161023123535) do
     t.text     "bio"
     t.string   "job"
     t.integer  "user_degree_id"
+    t.string   "gender"
+    t.string   "phone_number"
+    t.boolean  "verified"
+    t.string   "city"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["user_degree_id"], name: "index_users_on_user_degree_id"
+
+  create_table "vote_categories", force: :cascade do |t|
+    t.string   "category"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "vote_options", force: :cascade do |t|
     t.string   "title"
@@ -90,14 +101,7 @@ ActiveRecord::Schema.define(version: 20161023123535) do
 
   add_index "vote_options", ["vote_id"], name: "index_vote_options_on_vote_id"
 
-  create_table "votes", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.boolean  "status",     default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
+# Could not dump table "votes" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
 end

@@ -6,11 +6,10 @@ class Api::V1::User::SessionsController < UserController
 
     if user.valid_password? user_password
       sign_in user, store: false
-      # user.generate_authentication_token!
       user.save
       render json: {
       		status: 'success',
-      		data: user
+      		data: user.credential_as_json
       	}, status: 200
     else
       render json: { 
@@ -19,8 +18,4 @@ class Api::V1::User::SessionsController < UserController
       }, status: 422
     end
   end	
-  
-  def destroy
-
-  end
 end
