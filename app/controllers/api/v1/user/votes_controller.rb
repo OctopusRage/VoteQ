@@ -16,7 +16,7 @@ class Api::V1::User::VotesController < UserController
 		end
 
 		render json:{
-			status: 'OK',
+			status: 'success',
 			data: {
 				total: votes.count,
 				vote: votes
@@ -26,7 +26,7 @@ class Api::V1::User::VotesController < UserController
 
 	def create
 		is_open = params[:is_open]
-		vote = current_user.votes.build(title: params[:title], status: params[:is_open])
+		vote = current_user.votes.build(title: params[:title], status: params[:is_open], vote_category_id: params[:vote_category_id])
 		vote.generate_vote_options(params[:options])
 		if vote.save			
 			render json: {
@@ -54,7 +54,7 @@ class Api::V1::User::VotesController < UserController
 			}
 		else
 			render json: {
-				status: 'error',
+				status: 'fail',
 				messages: vote.errors
 			}, status: 422
 		end	
@@ -65,9 +65,9 @@ class Api::V1::User::VotesController < UserController
 		vote = vote.user_votes.find_by_user_id(current_user.id) if(current_user.user_votes.where(:vote_id => params[:id])).exists?
 
 		render json:{
-			status: 'OK',
+			status: 'success',
 			data: {
-				vote: vote
+				vote: vote.as_vote_details
 			}
 		},  status: 200
 	end
@@ -76,7 +76,7 @@ class Api::V1::User::VotesController < UserController
 		data = current_user.votes.find(params[:id])
 		if data.destroy
 			render json:{
-				status: "deleted",
+				status: "success",
 				data: {
 					messages:"a data has been deleted"
 				}

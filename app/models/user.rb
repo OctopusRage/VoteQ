@@ -2,12 +2,14 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   VALID_GENDER = %w(male female)
+  DEFAULT_DATE_OF_BIRTH = "1970-01-01T07:00:00Z"
 
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
 
   validates :auth_token, uniqueness: true, :on => :create
   validates :email, presence: true, :on => :create
+  validates :fullname, presence: true
   validates :password, presence: true, :on => :create
   validates :gender, inclusion: { in: VALID_GENDER },
   allow_blank: true, case_sensitive: false
@@ -46,13 +48,21 @@ class User < ActiveRecord::Base
     end
   end
 
-  def credential_as_json()
+  def as_simple
+    {
+      id: id, 
+      email: email,
+      fullname: fullname
+    }
+  end
+
+  def credential_as_json
     {
       id: id, 
       email: email, 
       fullname: fullname, 
       dateofbirth: dateofbirth,
-      age: age(date_of_birth) || 0,
+      age: age(dateofbirth) || 0,
       gender: gender,
       bio: bio,
       latitude: latitude, 
@@ -71,7 +81,7 @@ class User < ActiveRecord::Base
       email: email, 
       fullname: fullname, 
       dateofbirth: dateofbirth,
-      age: age(date_of_birth) || 0,
+      age: age(dateofbirth) || 0,
       gender: gender,
       bio: bio,
       latitude: latitude, 

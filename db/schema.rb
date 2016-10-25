@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024175307) do
+ActiveRecord::Schema.define(version: 20161025125308) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -53,18 +53,18 @@ ActiveRecord::Schema.define(version: 20161024175307) do
   add_index "user_votes", ["vote_option_id"], name: "index_user_votes_on_vote_option_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "auth_token",             default: ""
     t.string   "forgot_code"
     t.string   "fullname"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20161024175307) do
     t.integer  "user_degree_id"
     t.string   "gender"
     t.string   "phone_number"
-    t.boolean  "verified"
+    t.boolean  "verified",               default: false
     t.string   "city"
   end
 

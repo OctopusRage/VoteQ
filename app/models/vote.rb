@@ -1,6 +1,7 @@
 class Vote < ActiveRecord::Base	
 	before_destroy :delete_related
 
+	belongs_to :vote_category
 	belongs_to :user
 	has_many :vote_options, dependent: :destroy
 	has_many :user_votes, dependent: :destroy
@@ -28,15 +29,28 @@ class Vote < ActiveRecord::Base
 		self.user_votes.destroy_all
 	end
 
+	def as_vote_details
+		{
+			id: id,
+			title: title,
+			voter_count: voter_count,
+			user: user.as_simple,
+			status: status,
+			category: vote_category,
+			options: vote_options,
+			created_at: created_at
+		}
+	end
+
 	def as_json(options={})     
-	    {
-	      id: id,
-	      title: title,
-	      voter_count: voter_count,
-	      user: user,
-	      status: status,
-	      options: vote_options,
-	      created_at: created_at,
-	    }
+		{
+			id: id,
+			title: title,
+			voter_count: voter_count,
+			user: user.as_simple,
+			status: status,
+			category: vote_category.try(:category) || "",
+			created_at: created_at
+		}
   end
 end
