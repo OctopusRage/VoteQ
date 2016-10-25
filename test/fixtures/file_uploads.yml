@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  raw: MyString
+  hash_id: MyString
+  name: MyString
+  ext: MyString
+  uploader_id: 1
+  uploader_type: MyString
+
+two:
+  url: MyString
+  raw: MyString
+  hash_id: MyString
+  name: MyString
+  ext: MyString
+  uploader_id: 1
+  uploader_type: MyString

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025125308) do
+ActiveRecord::Schema.define(version: 20161025144720) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20161025125308) do
   add_index "admins", ["auth_token"], name: "index_admins_on_auth_token", unique: true
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "file_uploads", force: :cascade do |t|
+    t.string   "url"
+    t.string   "raw"
+    t.string   "hash_id"
+    t.string   "name"
+    t.string   "ext"
+    t.integer  "uploader_id"
+    t.string   "uploader_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "user_degrees", force: :cascade do |t|
     t.string   "degree"
