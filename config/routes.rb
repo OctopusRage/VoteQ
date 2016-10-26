@@ -31,6 +31,18 @@ Rails.application.routes.draw do
           resource :forgot_password, only: [:create], controller: :forgot_password
           resource :request_forgot_password, only: [:create], controller: :request_forgot_password
         end
+        namespace :files do
+          resources :avatars, only: [:create] do
+            member do
+              get ':file(.:ext)', action: 'get'
+            end
+          end
+          resources :upload, only: [:create] do
+            member do
+              get ':file(.:ext)', action: 'get'
+            end
+          end
+        end
       end
     end
   end

@@ -1,2 +1,7 @@
 GMAIL_USERNAME: 'ahyana1995@gmail.com'
 GMAIL_PASSWORD: 'jeansbolong'
+
+# Cloudinary email: sgggtg@gmail.com password: gamelostqa
+CLOUDINARY_API_KEY: '836753356524136'
+CLOUDINARY_API_SECRET: 'eaBUqh97HnFLkx9knrRMIIaxWOg'
+CLOUDINARY_CLOUD_NAME: 'elaine-dev'
